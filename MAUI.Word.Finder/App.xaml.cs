@@ -1,4 +1,6 @@
-﻿namespace MAUI.Word.Finder
+﻿using MAUI.Word.Finder.src.WordFinder.Presentation.Views;
+
+namespace MAUI.Word.Finder
 {
     public partial class App : Application
     {
