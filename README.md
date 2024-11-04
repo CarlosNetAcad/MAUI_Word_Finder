@@ -39,3 +39,46 @@ should count it only once.
 Due to the size of the word stream, the code should be implemented in a high performance
 fashion both in terms of efficient algorithm and utilization of system resources. Where possible,
 please include your analysis and evaluation.
+
+## Accepptance criteria
+
+- **Acceptance criteria 1:** The WordFinder receives a set of strings which represent a char matrix.
+- **Acceptance criteria 2:** The matrix size does not exceed 64x64.
+- **Acceptance criteria 3:** All the strings contain the same number of chars.
+- **Acceptance criteria 4:** Find() must return  the top 10 must repeated words.
+- **Acceptance criteria 5:** If no words are found, the find returns an empty set of strings.
+- **Acceptance criteria 6:** If any word is found more than once, the search results should count it once.
+
+## Solution description.
+
+My proposed solution is a MAUI project utilizing .NET 8, the Community Toolkit, and a Domain-Driven Design architecture. It follows the MVVM (Model-View-ViewModel) architectural pattern and adheres to SOLID principles.
+
+```mermaid
+classDiagram 
+
+    WordFinderService ..|> IWordFinderService
+    WordFinderService --> WordFinderEntity
+    
+    namespace WordFinder{
+        class IWordFinderService{
+            <<interface>>
+            Find(IEnumerable~string~) IEnumerable~string~
+            FindAsync(IEnumerable~string~, CancellationToken) Task~IEnumerable~string~~ 
+        }
+
+        class WordFinderService{
+        }
+
+        class WordFinderEntity{
+        }
+    }
+```
+
+## Performance analysis.
+
+- Added both synchronous and asynchronous methods to evaluate which are faster.
+- Avoided using try-catch blocks extensively as they consume resources at runtime. (Instead, I use to use the Result pattern to handle controlled exceptions. Reserved try-catch for unexpected exceptions such as internet disconnection or API timeouts).
+- I used for loops for iteration due to their lower performance cost compared to other looping constructs (foreach, high order functions loops).
+- Implemented flags to control the flow and meet acceptance criteria, helping to avoid unnecessary procedures.
+
+This provides a high-level overview of the performance evaluation.

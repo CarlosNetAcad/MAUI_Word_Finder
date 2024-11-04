@@ -49,7 +49,9 @@ public partial class MainViewModel : BaseViewModel
                 "wind"
             };
 
-            var wordsFound = await _wordFinderService.FindAsync(wordStream);
+            var cts = new CancellationTokenSource();
+
+            var wordsFound = await _wordFinderService.FindAsync(wordStream, cts.Token);
 
             if (wordsFound.Any())
             {
